@@ -1,0 +1,22 @@
+<h1>The Survey Center</h1>
+
+<h3>Add a Survey</h3>
+
+<form action="/survey" method="post">
+  <div class="form-group">
+    <input name="name" id="name" type="text">
+
+    <button type="submit" class="btn-success">Add Survey</button>
+  </div>
+</form>
+
+<h3>Select a Survey</h3>
+
+<ul>
+  <% @all_surveys.each do |survey| %>
+  <li><a href="/survey/<%=survey.id()%>"><%= survey.title()%></a></li>
+  <% end %>
+</ul>
+
+<br><br>
+<h5><a href="/" >Return to main page</a></h5>

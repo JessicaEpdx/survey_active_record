@@ -1,7 +1,7 @@
 <h1> <%= @question.name %></h1>
 <br>
 
-<form action="/question/<%=@question.id()%>" method="post">
+<form action="/survey/<%=@question.survey_id()%>" method="post">
   <input name="_method" type="hidden" value="delete">
 
   <div class="form-group">

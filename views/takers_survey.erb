@@ -1,0 +1,10 @@
+<h3>Choose a Question to Answer</h3>
+
+<ol>
+  <% @survey.questions.each do |question| %>
+  <li><a href="/takers/question/<%=question.id()%>"><%= question.name()%></a></li>
+  <% end %>
+</ol>
+
+<br><br>
+<h5><a href="/" >Return to main page</a></h5>
