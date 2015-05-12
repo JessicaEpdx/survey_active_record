@@ -1,0 +1,19 @@
+<h1> <%= @survey.title %>
+
+  <h3>Add a Question to this Survey</h3>
+
+  <form action="/survey/<%=@survey.id()%>" method="post">
+    <div class="form-group">
+      <input name="description" id="description" type="text">
+
+      <button type="submit" class="btn-success">Add Question</button>
+    </div>
+  </form>
+
+  <h3>All the questions for this Survey</h3>
+
+  <ul>
+    <% @survey.questions.each do |question| %>
+    <li><a href="/question/<%=question.id()%>"><%= question.name()%></a></li>
+    <% end %>
+  </ul>

@@ -1,0 +1,19 @@
+<h1> <%= @question.name %>
+
+  <h3>Respond to this Question</h3>
+
+  <form action="/question/<%=@question.id()%>" method="post">
+    <div class="form-group">
+      <input name="input" id="input" type="text">
+
+      <button type="submit" class="btn-success">Add Response</button>
+    </div>
+  </form>
+
+  <h3>All the Responses for this Question</h3>
+
+  <ul>
+    <% @question.responses.each do |response| %>
+    <li><%= response.input()%></li>
+    <% end %>
+  </ul>
