@@ -1,10 +1,25 @@
 <h3>Choose a Question to Answer</h3>
 
 <ol>
+
   <% @survey.questions.each do |question| %>
-  <li><a href="/takers/question/<%=question.id()%>"><%= question.name()%></a></li>
+    <li><%= question.name()%></li>
+
+    <form action="/takers/survey/<%=@survey.id%>" method="post">
+      <input name="_method" type="hidden" value="patch">
+      <select id="xresponse" name="response">
+        <% question.responses.each do |response| %>
+          <option value="<%= response.id() %>"><%= response.input() %></option>
+        <% end %>
+      </select>
+      <button type="submit">Answer Question</button>
+    </form>
+
   <% end %>
+
 </ol>
 
 <br><br>
+
+
 <h5><a href="/" >Return to main page</a></h5>

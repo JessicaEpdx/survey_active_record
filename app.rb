@@ -64,7 +64,7 @@ end
 
 post('/question/:id') do
   @question = Question.find(params.fetch("id").to_i)
-  @question.responses.new({:input => params.fetch("input")})
+  @question.responses.new({:input => params.fetch("input"), :count => 0})
   if @question.save
     erb(:question)
   else
@@ -96,6 +96,9 @@ get('/takers/survey/:id') do
   erb(:takers_survey)
 end
 
-get('/takers/question/:id') do
-  erb(:takers_question)
+patch('/takers/survey/:id') do
+  @survey = Survey.find(params.fetch("id").to_i())
+  @answer_choice = Response.find(params.fetch("response").to_i())
+  @answer_choice.update({:count => @answer_choice.count+1})
+  erb(:takers_survey)
 end
