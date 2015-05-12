@@ -3,8 +3,10 @@ require('sinatra/reloader')
 require('sinatra/activerecord')
 require('./lib/survey')
 require('./lib/question')
+require('./lib/response')
 also_reload('lib/**/*.rb')
 require('pg')
+require('pry')
 
 get('/') do
   @all_surveys = Survey.all()
@@ -49,4 +51,18 @@ post('/question/:id') do
   else
     erb(:errors)
   end
+end
+
+delete('/survey/:id') do
+  survey = Survey.find(params.fetch("id").to_i)
+  survey.delete()
+  @all_surveys = Survey.all()
+  erb(:index)
+end
+
+patch('/survey/:id') do
+  @survey = Survey.find(params.fetch("id").to_i)
+  @survey.update({:title => params.fetch("title")})
+  @all_surveys = Survey.all()
+  erb(:survey)
 end

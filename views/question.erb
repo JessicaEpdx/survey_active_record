@@ -1,4 +1,5 @@
-<h1> <%= @question.name %>
+<h1> <%= @question.name %></h1>
+
 
   <h3>Respond to this Question</h3>
 
@@ -14,6 +15,6 @@
 
   <ul>
     <% @question.responses.each do |response| %>
-    <li><%= response.input()%></li>
+      <li><%= response.input()%></li>
     <% end %>
   </ul>

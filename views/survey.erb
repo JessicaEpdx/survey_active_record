@@ -1,4 +1,5 @@
-<h1> <%= @survey.title %>
+<h1> <%= @survey.title %></h1>
+
 
   <h3>Add a Question to this Survey</h3>
 
@@ -7,6 +8,27 @@
       <input name="description" id="description" type="text">
 
       <button type="submit" class="btn-success">Add Question</button>
+    </div>
+  </form>
+
+  <form action="/survey/<%=@survey.id%>" method="post">
+    <input name="_method" type="hidden" value="delete">
+
+    <div class="form-group">
+      <button type="submit" class="btn-danger">Delete Survey</button>
+    </div>
+  </form>
+
+  <br><br>
+
+  <h3>Change Survey Title</h3>
+
+
+  <form action="/survey/<%=@survey.id%>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <div class="form-group">
+      <input name="title" id="title" type="text">
+      <button type="submit" class="btn-success">Rename your Survey</button>
     </div>
   </form>
 
