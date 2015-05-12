@@ -8,6 +8,7 @@ also_reload('lib/**/*.rb')
 require('pg')
 require('pry')
 
+
 get('/') do
   @all_surveys = Survey.all()
   erb(:index)
@@ -29,6 +30,7 @@ get('/survey/:id') do
 end
 
 post('/survey/:id') do
+  @all_surveys = Survey.all()
   @survey = Survey.find(params.fetch("id").to_i)
   @survey.questions.new({:name => params.fetch("description")})
   if @survey.save()
@@ -36,6 +38,20 @@ post('/survey/:id') do
   else
     erb(:errors)
   end
+end
+
+patch('/survey/:id') do
+  @survey = Survey.find(params.fetch("id").to_i)
+  @survey.update({:title => params.fetch("title")})
+  @all_surveys = Survey.all()
+  erb(:survey)
+end
+
+delete('/survey/:id') do
+  survey = Survey.find(params.fetch("id").to_i)
+  survey.delete()
+  @all_surveys = Survey.all()
+  erb(:index)
 end
 
 get('/question/:id') do
@@ -53,16 +69,16 @@ post('/question/:id') do
   end
 end
 
-delete('/survey/:id') do
-  survey = Survey.find(params.fetch("id").to_i)
-  survey.delete()
-  @all_surveys = Survey.all()
-  erb(:index)
+patch('/question/:id') do
+  @question = Question.find(params.fetch("id").to_i)
+  @question.update({:name => params.fetch("name")})
+
+  erb(:question)
 end
 
-patch('/survey/:id') do
-  @survey = Survey.find(params.fetch("id").to_i)
-  @survey.update({:title => params.fetch("title")})
+delete('/question/:id') do
+  question = Question.find(params.fetch("id").to_i)
+  question.delete()
   @all_surveys = Survey.all()
-  erb(:survey)
+  erb(:index)
 end
